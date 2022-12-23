@@ -29,6 +29,10 @@ class Block{
         const lastHash  = lastBlock.hash; // HASH-Wert des Vorgängers
         const hash = Block.hash(timestamp,lastHash,ownData); // aktueller Hash
 
+         // dazwischen liegt der Miningaufwand .... Energie!!!! / Zeit vergeht ....
+        // Sicher(er) wie Fort Knox! --> Proof of Work
+
+
         return new this(timestamp,lastHash,hash,ownData);
 
     }
