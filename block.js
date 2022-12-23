@@ -1,5 +1,6 @@
 
 // Klasse
+const SHA256 = require("crypto-js/sha256");
 
 class Block{
 
@@ -23,15 +24,18 @@ class Block{
     }
 
     static mineBlock(lastBlock,ownData){ // weitere Blocks in der Chain
+        
         const timestamp = Date.now(); // Zeit im ms seit 01.01.1970 | UNIX
         const lastHash  = lastBlock.hash; // HASH-Wert des Vorgängers
-        const hash = "ownHash";
+        const hash = Block.hash(timestamp,lastHash,ownData); // aktueller Hash
 
         return new this(timestamp,lastHash,hash,ownData);
 
     }
 
-
+    static hash(timestamp,lastHash,ownData){
+        return SHA256(`${timestamp}${lastHash}${ownData}`).toString();
+    }
 
 }
 
